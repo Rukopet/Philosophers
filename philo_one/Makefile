@@ -2,7 +2,8 @@
 CC = clang
 NAME = philo_one
 FLAG = -Wall -g #-Wextra -Werror
-SRC = main.c ft_itoa.c ft_atoi.c ft_strdup.c create_philo.c func_for_philo.c
+SRC = main.c ft_itoa.c ft_atoi.c create_philo.c func_for_philo.c\
+		monitor.c time.c allocation_mutexes.c utils.c
 OBJ = $(SRC:.c=.o)
 HEADER = philo.h
 all: $(NAME)
