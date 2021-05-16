@@ -32,7 +32,7 @@ typedef struct	s_st
 typedef struct	s_phil
 {
 	t_st		*st;
-	int			parity;
+	short			parity;
 	int 		id;
 
 	pthread_mutex_t *lfork;
@@ -42,7 +42,7 @@ typedef struct	s_phil
 
 	pthread_mutex_t *write_mute;
 	pthread_mutex_t *someone_dead;
-	unsigned int start_time
+	unsigned int start_time;
 }				t_phil;
 
 char	*ft_itoa(int n);
@@ -56,6 +56,7 @@ int create_philo(t_st *s, pthread_mutex_t *write_mute, \
 void	*func_for_philo(void *phil);
 void	*func_for_monitor(void *phil);
 unsigned int	current_time(void);
+void 			wait_function(unsigned int wait_timing);
 
 int 	fill_forks_for_philos(t_phil **philos, t_st *s, unsigned int start_time);
 pthread_mutex_t **alloc_mutexes_forks(t_st *s);

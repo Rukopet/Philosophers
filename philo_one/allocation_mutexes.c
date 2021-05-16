@@ -29,7 +29,7 @@ int 	fill_forks_for_philos(t_phil **philos, t_st *s, unsigned int start_time)
 		if (i == 0)
 		{
 			philos[i]->lfork = s->forks[i];
-			philos[i]->rfork = s->forks[s->amount];
+			philos[i]->rfork = s->forks[s->amount - 1];
 		}
 		else
 		{
@@ -37,11 +37,11 @@ int 	fill_forks_for_philos(t_phil **philos, t_st *s, unsigned int start_time)
 			philos[i]->rfork = s->forks[i - 1];
 		}
 		philos[i]->parity = FALSE;
+		philos[i]->st = s;
 		if (i % 2 == 0)
 			philos[i]->parity = TRUE;
 		philos[i]->start_time = start_time;
 		philos[i]->id = i;
-		philos[i]->dead_status = s->deadinside[i];
 	}
 	return (1);
 }

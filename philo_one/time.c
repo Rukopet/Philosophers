@@ -1,5 +1,13 @@
 #include "philo.h"
 
+void 			wait_function(unsigned int wait_timing)
+{
+	unsigned int	calc_time;
+
+	calc_time = 0;
+	usleep(wait_timing);
+}
+
 unsigned int	current_time(void)
 {
 	unsigned int ret;

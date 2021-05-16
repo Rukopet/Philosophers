@@ -24,15 +24,16 @@ t_phil **alloc_phils(t_st *s, unsigned int start_time)
 	t_phil	**ret;
 	int i;
 
-	ret = (t_phil **)malloc(sizeof(t_phil *) * (s->amount * 2));
+	ret = (t_phil **)malloc(sizeof(t_phil *) * (s->amount));
 	if (!ret)
 		return (NULL);
 	i = -1;
-	while (++i != s->amount * 2)
+	while (++i != s->amount)
 	{
 		ret[i] = malloc(sizeof(t_phil));
 		if (!ret[i])
 			return (NULL);
+		memset(ret[i], 0, sizeof(t_phil));
 	}
 	s->forks = alloc_mutexes_forks(s);
 	if (!s->forks)
@@ -58,13 +59,12 @@ int create_philo(t_st *s, pthread_mutex_t *write, pthread_mutex_t *someone_dead)
 	{
 		p[i]->write_mute = write;
 		p[i]->someone_dead = someone_dead;
-		if (0 != pthread_create(tr[i], NULL, func_for_philo, &p[i]))
+		if (0 != pthread_create(tr[i], NULL, func_for_philo, p[i]))
 			return (0);
 		pthread_detach(*tr[i]);
+		usleep(100);
 	}
 	i = -1;
-	while (++i != s->amount)
-		if (0 != pthread_join(*tr[i], NULL))
-			return (0);
+	pthread_mutex_lock(someone_dead);
 	return (1);
 }
