@@ -16,8 +16,11 @@
 # define DIED 4
 # define END 5
 
+
 # define  TRUE 1
 # define	FALSE 0
+
+# define TIMER_CURRENT_MILISECS 25
 
 typedef struct	s_st
 {
@@ -36,7 +39,9 @@ typedef struct	s_phil
 	int 		id;
 
 	pthread_mutex_t *lfork;
+	int lf;
 	pthread_mutex_t *rfork;
+	int rf;
 	unsigned int 	last_eat;
 
 
@@ -50,7 +55,8 @@ int		ft_atoi(const char *nptr);
 char	*ft_strdup(const char *s1);
 int		ft_strlen(const char *s);
 
-void ft_putnbr(int val);
+void ft_putnbr(unsigned int n);
+void ft_putchar(char c);
 int create_philo(t_st *s, pthread_mutex_t *write_mute, \
 	pthread_mutex_t *someone_dead);
 void	*func_for_philo(void *phil);

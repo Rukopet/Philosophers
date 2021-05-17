@@ -9,7 +9,7 @@ pthread_t **alloc_threads(t_st *s)
 	if (!ret)
 		return (NULL);
 	i = -1;
-	while (++i != s->amount * 2)
+	while (++i != s->amount)
 	{
 		ret[i] = malloc(sizeof(pthread_t));
 		if (!ret[i])
@@ -62,7 +62,7 @@ int create_philo(t_st *s, pthread_mutex_t *write, pthread_mutex_t *someone_dead)
 		if (0 != pthread_create(tr[i], NULL, func_for_philo, p[i]))
 			return (0);
 		pthread_detach(*tr[i]);
-		usleep(100);
+//		wait_function(10);
 	}
 	i = -1;
 	pthread_mutex_lock(someone_dead);

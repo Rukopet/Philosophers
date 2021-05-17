@@ -21,25 +21,21 @@ void ft_putchar(char c)
 	write (1, &c, 1);
 }
 
-void ft_putnbr(int val)
+void ft_putnbr(unsigned int n)
 {
-	int	l;
-	int v;
+	char str[13];
+	int length;
 
-	l = 1;
-	v = val;
-	if (v < 0)
+	if (n == 0)
+		str[0] = '0';
+	length = 0;
+	while (n != 0)
 	{
-		write(1, "-", 1);
-		v = v * -1;
+		str[length++] = '0' + (n % 10);
+		n = (n / 10);
 	}
-	while ((v = v / 10) > 0)
-		l *= 10;
-	while (l > 0)
-	{
-		v = val % l;
-		ft_putchar(v + '0');
-		val -= v * 10;
-		l /= 10;
-	}
+	if (length > 0)
+		length--;
+	while (length >= 0)
+		write(1, &str[length--], 1);
 }

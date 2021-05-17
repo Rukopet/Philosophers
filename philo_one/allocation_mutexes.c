@@ -30,11 +30,15 @@ int 	fill_forks_for_philos(t_phil **philos, t_st *s, unsigned int start_time)
 		{
 			philos[i]->lfork = s->forks[i];
 			philos[i]->rfork = s->forks[s->amount - 1];
+			philos[i]->lf = i;
+			philos[i]->rf = s->amount - 1;
 		}
 		else
 		{
 			philos[i]->lfork = s->forks[i];
 			philos[i]->rfork = s->forks[i - 1];
+			philos[i]->lf = i;
+			philos[i]->rf = i - 1;
 		}
 		philos[i]->parity = FALSE;
 		philos[i]->st = s;
