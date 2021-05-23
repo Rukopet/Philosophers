@@ -4,7 +4,7 @@ void	*func_for_monitor(void *phil)
 {
 	t_phil *p;
 	unsigned long	prev_time_eat;
-	unsigned long	current_eat_count;
+	int	current_eat_count;
 
 	current_eat_count = 0;
 	p = (t_phil *)phil;
@@ -21,11 +21,11 @@ void	*func_for_monitor(void *phil)
 		}
 		usleep(50);
 	}
-	pthread_mutex_lock(p->monitors_lock);
+	sem_wait(p->st->sem_monitor_off);
 	if (p->st->count_eat < current_eat_count)
-		pthread_mutex_lock(p->write_mute);
+		sem_wait(p->st->sem_write);
 	else
 		write_message(p, DIED);
-	pthread_mutex_unlock(p->someone_dead);
+	sem_post(p->st->sem_dead);
 	return (NULL);
 }

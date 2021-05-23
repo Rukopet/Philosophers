@@ -8,7 +8,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <limits.h>
-
+# include <semaphore.h>
 
 
 # define EAT 0
@@ -29,7 +29,11 @@ typedef struct	s_st
 	unsigned long	tt_eat;
 	unsigned long	tt_sleep;
 	int				count_eat;
-	pthread_mutex_t **forks;
+
+	sem_t			*sem_forks;
+	sem_t			*sem_write;
+	sem_t			*sem_dead;
+	sem_t			*sem_monitor_off;
 }					t_st;
 
 typedef struct	s_phil
@@ -38,13 +42,7 @@ typedef struct	s_phil
 	short			parity;
 	int 		id;
 
-	pthread_mutex_t *lfork;
-	pthread_mutex_t *rfork;
 	unsigned long 	last_eat;
-
-	pthread_mutex_t *write_mute;
-	pthread_mutex_t *someone_dead;
-	pthread_mutex_t *monitors_lock;
 	unsigned long start_time;
 }				t_phil;
 
@@ -54,16 +52,14 @@ int		ft_strlen(const char *s);
 
 void ft_putnbr(unsigned long n);
 void ft_putchar(char c);
-int create_philo(t_st *s, pthread_mutex_t *write_mute, \
-	pthread_mutex_t *someone_dead);
+int create_philo(t_st *s);
 void	*func_for_philo(void *phil);
 void	*func_for_monitor(void *phil);
 unsigned long	current_time(void);
 void 			wait_function(unsigned long wait_timing);
 
-int fill_forks_for_philos(t_phil **philos, t_st *s, unsigned long start_time,
-						  pthread_mutex_t *monitors_lock);
-pthread_mutex_t **alloc_mutexes_forks(t_st *s);
+int fill_forks_for_philos(t_phil **philos, t_st *s, unsigned long start_time);
+int		init_sem_for_phil(t_st *st);
 void 	write_message(t_phil *p, int type);
 
 #endif

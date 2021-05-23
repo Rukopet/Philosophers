@@ -19,11 +19,9 @@ pthread_t **alloc_threads(t_st *s)
 	return (ret);
 }
 
-t_phil **alloc_phils(t_st *s, unsigned long start_time, \
-pthread_mutex_t *someone_dead, pthread_mutex_t *write)
+t_phil **alloc_phils(t_st *s, unsigned long start_time)
 {
 	t_phil	**ret;
-	pthread_mutex_t *monitors_lock;
 	int i;
 
 	ret = (t_phil **)malloc(sizeof(t_phil *) * (s->amount));
@@ -36,20 +34,12 @@ pthread_mutex_t *someone_dead, pthread_mutex_t *write)
 		if (!ret[i])
 			return (NULL);
 		memset(ret[i], 0, sizeof(t_phil));
-		ret[i]->someone_dead = someone_dead;
-		ret[i]->write_mute = write;
 	}
-	s->forks = alloc_mutexes_forks(s);
-	if (!s->forks)
-		return (NULL);
-	monitors_lock = malloc(sizeof(pthread_mutex_t));
-	if (!monitors_lock)
-		return (NULL);
-	fill_forks_for_philos(ret, s, start_time, monitors_lock);
+	fill_forks_for_philos(ret, s, start_time);
 	return (ret);
 }
 
-int create_philo(t_st *s, pthread_mutex_t *write, pthread_mutex_t *someone_dead)
+int create_philo(t_st *s)
 {
 	pthread_t **tr;
 	t_phil **p;
@@ -58,7 +48,7 @@ int create_philo(t_st *s, pthread_mutex_t *write, pthread_mutex_t *someone_dead)
 
 	start_time = current_time();
 	tr = alloc_threads(s);
-	p = alloc_phils(s, start_time, someone_dead, write);
+	p = alloc_phils(s, start_time);
 	if (!tr || !p)
 		return (0);
 	i = -1;
@@ -68,6 +58,6 @@ int create_philo(t_st *s, pthread_mutex_t *write, pthread_mutex_t *someone_dead)
 			return (0);
 		pthread_detach(*(tr[i]));
 	}
-	pthread_mutex_lock(someone_dead);
+	sem_wait(s->sem_dead);
 	return (1);
 }

@@ -2,11 +2,11 @@
 
 char	*ft_strdup(const char *s1)
 {
-	size_t	len;
+	int		len;
 	char	*res;
 	int	i;
 
-	len = ft_strlen(s1);
+	len = (int)ft_strlen(s1);
 	res = (char *)malloc(sizeof(char) * ++len);
 	if (!res)
 		return (NULL);
