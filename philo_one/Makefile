@@ -8,10 +8,10 @@ OBJ = $(SRC:.c=.o)
 HEADER = philo.h
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADER)
+$(NAME): $(OBJ)
 	@$(CC) $(FLAG) -o $(NAME) $(SRC)
 
-%.o: %.c libft.h
+%.o: %.c $(HEADER)
 	@$(CC) -c $(FLAG) $< $(INC)
 
 .PHONY: all clean fclean re

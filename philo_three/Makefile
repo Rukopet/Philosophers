@@ -11,7 +11,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(CC) $(FLAG) -o $(NAME) $(SRC)
 
-%.o: %.c libft.h
+%.o: %.c $(HEADER)
 	@$(CC) -c $(FLAG) $< $(INC)
 
 .PHONY: all clean fclean re

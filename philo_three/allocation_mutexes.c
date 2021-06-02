@@ -29,7 +29,7 @@ int	fill_forks_for_philos(t_phil **philos, t_st *s, unsigned long start_time)
 		if (i % 2 == 0)
 			philos[i]->parity = TRUE;
 		philos[i]->start_time = start_time;
-		philos[i]->id = i;
+		philos[i]->id = i + 1;
 	}
 	return (1);
 }

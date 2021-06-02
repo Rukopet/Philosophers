@@ -38,7 +38,7 @@ pthread_mutex_t *monitors_lock)
 		if (i % 2 == 0)
 			philos[i]->parity = TRUE;
 		philos[i]->start_time = start_time;
-		philos[i]->id = i;
+		philos[i]->id = i + 1;
 	}
 	return (1);
 }
