@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int pars_values(t_st *s, int argc, char **argv)
+int	pars_values(t_st *s, int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 		return (0);

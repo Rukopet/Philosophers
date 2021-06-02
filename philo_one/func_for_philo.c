@@ -8,10 +8,10 @@ void 	print_mess(char *mess, int id, unsigned long time)
 	write(1, mess, ft_strlen(mess));
 }
 
-void 	write_message(t_phil *p, int type)
+void	write_message(t_phil *p, int type)
 {
 	unsigned long	curr_time;
-	static short flag;
+	static short	flag;
 
 	flag = 0;
 	pthread_mutex_lock(p->write_mute);
@@ -30,7 +30,7 @@ void 	write_message(t_phil *p, int type)
 		{
 			++flag;
 			print_mess(" died\n", p->id, curr_time);
-			return;
+			return ;
 		}
 	}
 	pthread_mutex_unlock(p->write_mute);
@@ -55,13 +55,12 @@ void	philo_lifetime(t_phil *p)
 		wait_function(p->st->tt_sleep);
 		write_message(p, THINK);
 	}
-
 }
 
 void	*func_for_philo(void *phil)
 {
-	t_phil	*p;
-	pthread_t monitor;
+	t_phil		*p;
+	pthread_t	monitor;
 
 	p = (t_phil *)phil;
 	pthread_create(&monitor, NULL, func_for_monitor, phil);

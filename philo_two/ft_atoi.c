@@ -22,7 +22,6 @@ int	ft_strlen(const char *s)
 	return (len);
 }
 
-
 static int	ret(unsigned long answer, int minus)
 {
 	unsigned long	ul_max;

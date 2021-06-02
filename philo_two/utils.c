@@ -4,7 +4,7 @@ char	*ft_strdup(const char *s1)
 {
 	int		len;
 	char	*res;
-	int	i;
+	int		i;
 
 	len = (int)ft_strlen(s1);
 	res = (char *)malloc(sizeof(char) * ++len);
@@ -16,15 +16,15 @@ char	*ft_strdup(const char *s1)
 	return (res);
 }
 
-void ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write (1, &c, 1);
 }
 
-void ft_putnbr(unsigned long n)
+void	ft_putnbr(unsigned long n)
 {
-	char str[13];
-	int length;
+	char	str[13];
+	int		length;
 
 	if (n == 0)
 		str[0] = '0';

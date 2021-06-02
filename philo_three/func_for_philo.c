@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void 	print_mess(char *mess, int id, unsigned long time)
+void	print_mess(char *mess, int id, unsigned long time)
 {
 	ft_putnbr(time);
 	ft_putchar(' ');
@@ -8,7 +8,7 @@ void 	print_mess(char *mess, int id, unsigned long time)
 	write(1, mess, ft_strlen(mess));
 }
 
-void 	write_message(t_phil *p, int type)
+void	write_message(t_phil *p, int type)
 {
 	unsigned long	curr_time;
 
@@ -25,7 +25,7 @@ void 	write_message(t_phil *p, int type)
 	else if (type == DIED)
 	{
 		print_mess(" died\n", p->id, curr_time);
-		return;
+		return ;
 	}
 	sem_post(p->st->sem_write);
 }
@@ -49,13 +49,12 @@ void	philo_lifetime(t_phil *p)
 		wait_function(p->st->tt_sleep);
 		write_message(p, THINK);
 	}
-
 }
 
 void	*func_for_philo(void *phil)
 {
-	t_phil	*p;
-	pthread_t monitor;
+	t_phil		*p;
+	pthread_t	monitor;
 
 	p = (t_phil *)phil;
 	pthread_create(&monitor, NULL, func_for_monitor, phil);

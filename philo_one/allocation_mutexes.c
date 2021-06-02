@@ -1,9 +1,9 @@
 #include "philo.h"
 
-pthread_mutex_t **alloc_mutexes_forks(t_st *s)
+pthread_mutex_t	**alloc_mutexes_forks(t_st *s)
 {
-	pthread_mutex_t **ret;
-	int	i;
+	pthread_mutex_t	**ret;
+	int				i;
 
 	ret = (pthread_mutex_t **) malloc(sizeof(pthread_mutex_t *) * s->amount);
 	if (!ret)
@@ -22,7 +22,7 @@ pthread_mutex_t **alloc_mutexes_forks(t_st *s)
 int	fill_forks_for_philos(t_phil **philos, t_st *s, unsigned long start_time, \
 pthread_mutex_t *monitors_lock)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	pthread_mutex_init(monitors_lock, NULL);

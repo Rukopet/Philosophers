@@ -1,6 +1,6 @@
 #include "philo.h"
 
-pthread_t **alloc_threads(t_st *s)
+pthread_t	**alloc_threads(t_st *s)
 {
 	pthread_t	**ret;
 	int			i;
@@ -19,10 +19,10 @@ pthread_t **alloc_threads(t_st *s)
 	return (ret);
 }
 
-t_phil **alloc_phils(t_st *s, unsigned long start_time)
+t_phil	**alloc_phils(t_st *s, unsigned long start_time)
 {
 	t_phil	**ret;
-	int i;
+	int		i;
 
 	ret = (t_phil **)malloc(sizeof(t_phil *) * (s->amount));
 	if (!ret)
@@ -39,12 +39,12 @@ t_phil **alloc_phils(t_st *s, unsigned long start_time)
 	return (ret);
 }
 
-int create_philo(t_st *s)
+int	create_philo(t_st *s)
 {
-	pthread_t **tr;
-	t_phil **p;
-	int	i;
-	unsigned long start_time;
+	pthread_t		**tr;
+	t_phil			**p;
+	int				i;
+	unsigned long	start_time;
 
 	start_time = current_time();
 	tr = alloc_threads(s);

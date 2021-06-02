@@ -10,7 +10,8 @@ int	init_sem_for_phil(t_st *st)
 	st->sem_write = sem_open("sem_write", O_CREAT | O_EXCL, 0644, 1);
 	st->sem_dead = sem_open("sem_dead", O_CREAT | O_EXCL, 0644, 1);
 	sem_wait(st->sem_dead);
-	st->sem_monitor_off = sem_open("sem_monitor_off", O_CREAT | O_EXCL, 0644, 1);
+	st->sem_monitor_off = sem_open("sem_monitor_off", \
+O_CREAT | O_EXCL, 0644, 1);
 	if (st->sem_dead == SEM_FAILED || st->sem_write == SEM_FAILED || \
 	st->sem_dead == SEM_FAILED || st->sem_dead == SEM_FAILED)
 		return (0);
@@ -19,7 +20,7 @@ int	init_sem_for_phil(t_st *st)
 
 int	fill_forks_for_philos(t_phil **philos, t_st *s, unsigned long start_time)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < s->amount)

@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int pars_values(t_st *s, int argc, char **argv)
+int	pars_values(t_st *s, int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 		return (0);
@@ -24,9 +24,9 @@ int pars_values(t_st *s, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_st	s;
-	pthread_mutex_t write_mute;
-	pthread_mutex_t someone_dead;
+	t_st			s;
+	pthread_mutex_t	write_mute;
+	pthread_mutex_t	someone_dead;
 
 	memset(&s, 0, sizeof(s));
 	if (!pars_values(&s, argc, argv))
