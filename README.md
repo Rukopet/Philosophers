@@ -7,7 +7,7 @@ Autors: @egums.
 
 - To abstract one thread as a philosopher and make sure that they do not die, they should eat, sleep and think, as described in the assignment. Forks are presented in the form of a mutex, or a semaphore, depending on what kind of task it is.
 
-- [wiki for philo](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+- [Dining_philosophers_problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 
 ### Compile
 
